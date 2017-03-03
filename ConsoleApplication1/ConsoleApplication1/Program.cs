@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
-using nsClearConsole;
+using System.Xml.Serialization;
+//using nsClearConsole;
 
 namespace ConsoleApplication1
 {
@@ -10,15 +11,12 @@ namespace ConsoleApplication1
     {
 
         List<Account> acctList = new List<Account>();
-        ClearConsole myCC = new ClearConsole();
-        string dir = @".\test.out";
-        //String aName;
-        //Account account = new Account();
+        string dir = @"C:/Users/Chau/Desktop/test.xml";
 
         public static void Main(string[] args)
         {
             Program myATM = new Program();
-            
+
             myATM.readAccount();
             //myATM.createAccount();
             myATM.atmMenu();
@@ -29,18 +27,20 @@ namespace ConsoleApplication1
         {
             try
             {
-                using (Stream stream = File.Open(dir, FileMode.Open))
+                using (Stream stream = File.OpenRead(dir))
                 {
                     var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     acctList = (List<Account>)bFormatter.Deserialize(stream);
+                    //XmlSerializer xDeserialize = new XmlSerializer(typeof(List<Account>));
+                    //acctList = (List<Account>)xDeserialize.Deserialize(stream);
                     stream.Close();
-                    if(acctList.Count <= 0)
+                    if (acctList.Count <= 0)
                     {
                         createAccount();
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 createAccount();
             }
@@ -54,7 +54,7 @@ namespace ConsoleApplication1
 
             do
             {
-                myCC.Clear();
+                Console.Clear();
                 Console.WriteLine("\t ATM MENU");
                 Console.WriteLine("-------------------------------");
                 Console.WriteLine("1. Create a new account");
@@ -64,7 +64,7 @@ namespace ConsoleApplication1
                 Console.WriteLine("-------------------------------");
                 Console.WriteLine("Please choose one: ");
                 str = Console.ReadLine();
-                myCC.Clear();               
+                Console.Clear();
 
                 if (!int.TryParse(str, out number) || string.IsNullOrEmpty(str))
                 {
@@ -111,7 +111,7 @@ namespace ConsoleApplication1
             Console.WriteLine("Please enter a name for your new account: ");
             aName = Convert.ToString(Console.ReadLine());
             Thread.Sleep(1 * 1000);
-            myCC.Clear();
+            Console.Clear();
 
 
             if (string.IsNullOrEmpty(aName))
@@ -136,14 +136,14 @@ namespace ConsoleApplication1
                     Console.WriteLine("\n\n");
                     Console.WriteLine("Hit ENTER to try again...");
                     Console.ReadLine();
-                    myCC.Clear();
+                    Console.Clear();
                 }
                 else
                 {
                     acctList.Add(new Account(100.00, aName));
                     Console.WriteLine("Account " + "|" + aName.ToUpper() + "|" + " was successfully created.");
                     Thread.Sleep(1 * 1000);
-                    myCC.Clear();
+                    Console.Clear();
                 }
                 Console.WriteLine();
             }
@@ -155,32 +155,36 @@ namespace ConsoleApplication1
             string str;
             String accountName;
 
-            if(acctList.Count > 0)
+            if (acctList.Count > 0)
             {
                 Console.WriteLine("CURRENT ACCOUNTS");
                 Console.WriteLine("----------------");
-                for(int i = 0; i < acctList.Count; i++)
+                for (int i = 0; i < acctList.Count; i++)
                 {
                     Console.WriteLine("Account " + (i + 1) + ": " + acctList[i].Acct.ToUpper());
                 }
 
                 Console.WriteLine("----------------");
-                Console.WriteLine("Please enter the number of the account you want to remove.");
+                Console.WriteLine("Please enter the number of the account you want to remove or type " + "-1" + " to go back.");
                 str = Console.ReadLine();
                 Thread.Sleep(1 * 1000);
-                myCC.Clear();
+                Console.Clear();
                 int number;
 
                 if (!int.TryParse(str, out number) || string.IsNullOrEmpty(str))
                 {
-                    Console.WriteLine("Please input a number.");
-                    Console.WriteLine();
-                    removeAccount();
+                        Console.WriteLine("Please input a number.");
+                        Console.WriteLine();
+                        removeAccount();
                 }
                 else
                 {
                     acctNumber = Convert.ToInt32(str);
-                    if (acctNumber <= acctList.Count && acctNumber > 0)
+                    if (acctNumber == -1)
+                    {
+                        //Exit back to the menu without removing accounts.
+                    }
+                    else if (acctNumber <= acctList.Count && acctNumber > 0)
                     {
                         for (int i = 0; i < acctList.Count; i++)
                         {
@@ -191,7 +195,7 @@ namespace ConsoleApplication1
                                 Console.WriteLine();
                                 Console.WriteLine("Account " + "|" + accountName.ToUpper() + "|" + " was successfully removed.");
                                 Thread.Sleep(1 * 1000);
-                                myCC.Clear();
+                                Console.Clear();
                             }
                         }
                     }
@@ -210,7 +214,7 @@ namespace ConsoleApplication1
                 Console.WriteLine("\n\n");
                 Console.WriteLine("Hit ENTER to go back to main MENU...");
                 Console.ReadLine();
-                myCC.Clear();
+                Console.Clear();
             }
         }
 
@@ -219,7 +223,7 @@ namespace ConsoleApplication1
             int input;
             string str;
 
-            if(acctList.Count > 0)
+            if (acctList.Count > 0)
             {
                 Console.WriteLine("CURRENT ACCOUNTS");
                 Console.WriteLine("----------------");
@@ -229,10 +233,10 @@ namespace ConsoleApplication1
                 }
 
                 Console.WriteLine("----------------");
-                Console.WriteLine("Please enter the account number: ");
+                Console.WriteLine("Please enter the account number or " + "-1" + " to go back: ");
                 str = Console.ReadLine();
                 Thread.Sleep(1 * 1000);
-                myCC.Clear();
+                Console.Clear();
                 int number;
 
                 if (!int.TryParse(str, out number) || string.IsNullOrEmpty(str))
@@ -244,7 +248,11 @@ namespace ConsoleApplication1
                 else
                 {
                     input = Convert.ToInt32(str);
-                    if (input <= acctList.Count && input > 0)
+                    if (input == -1)
+                    {
+                        //Exit back to the menu without accessing accounts.
+                    }
+                    else if (input <= acctList.Count && input > 0)
                     {
                         for (int i = 0; i < acctList.Count; i++)
                         {
@@ -268,23 +276,31 @@ namespace ConsoleApplication1
                 Console.WriteLine("\n\n");
                 Console.WriteLine("Hit ENTER to go back to main MENU...");
                 Console.ReadLine();
-                myCC.Clear();
+                Console.Clear();
             }
         }
 
         public void writeAccount()
-        {           
+        {
             //string serializationFile = Path.Combine(dir);
             try
             {
-                using (Stream stream = File.Open(dir, FileMode.Create))
+                using (Stream stream = File.Create(dir))
                 {
                     var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                     bFormatter.Serialize(stream, acctList);
+                    //XmlSerializer xSerialize = new XmlSerializer(typeof(List<Account>));
+                    //xSerialize.Serialize(stream, acctList);
                     stream.Flush();
                     stream.Close();
                 }
+                //using (Stream stream = File.Create("C:/Users/Chau/Desktop/test.xml"))
+                //{
+                //    XmlSerializer serializer = new XmlSerializer(typeof(List<Account>));
+                //    serializer.Serialize(stream, acctList);
+                //    stream.Close();
+                //}
             }
             catch (Exception e)
             {

@@ -4,3 +4,9 @@ C:\Users\Chau\Documents\UMSL-Spring2017\C#-3844\inclass\ConsoleApplication1\Cons
 C:\Users\Chau\Documents\UMSL-Spring2017\C#-3844\inclass\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Chau\Documents\UMSL-Spring2017\C#-3844\inclass\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\Chau\Documents\UMSL-Spring2017\C#-3844\inclass\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Chau\Source\Repos\UMSL\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
