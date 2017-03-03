@@ -11,7 +11,7 @@ namespace ConsoleApplication1
     {
 
         List<Account> acctList = new List<Account>();
-        string dir = @"C:/Users/Chau/Desktop/test.xml";
+        string dir = @"./test.out";
 
         public static void Main(string[] args)
         {
@@ -42,6 +42,7 @@ namespace ConsoleApplication1
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error: " + e.Message);
                 createAccount();
             }
         }
