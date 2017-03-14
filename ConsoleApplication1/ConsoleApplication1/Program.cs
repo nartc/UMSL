@@ -32,7 +32,7 @@ namespace ConsoleApplication1
                 {
                     //var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     //acctList = (List<Account>)bFormatter.Deserialize(stream);
-                    XmlSerializer xDeserialize = new XmlSerializer(typeof(Account));
+                    XmlSerializer xDeserialize = new XmlSerializer(typeof(List<Account>));
                     acctList = (List<Account>)xDeserialize.Deserialize(stream);
                     stream.Close();
                     if (acctList.Count <= 0)

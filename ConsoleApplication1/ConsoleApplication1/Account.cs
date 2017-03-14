@@ -16,17 +16,17 @@ namespace ConsoleApplication1
         //[XmlElement("AccountBalance")]
         //protected double balance { get; set; }
         public double balance { get; set; }
-        protected int firstDate;
-        protected int secondDate;
-        protected bool usePrevDate = false;
+        public int firstDate;
+        public int secondDate;
+        public bool usePrevDate = false;
         //protected Calendar cal1 = new JulianCalendar();
         //protected Calendar cal2 = new JulianCalendar();
         protected Calendar cal1 = new GregorianCalendar();
         protected Calendar cal2 = new GregorianCalendar();
-        protected bool dateflag = false;
-        protected double rate;
-        protected double accumInterest;
-        protected String dispDate;
+        public bool dateflag = false;
+        public double rate;
+        public double accumInterest;
+        public String dispDate;
         //[XmlElement("AccountName")]
         //protected String acctName { get; set; }
         public String acctName { get; set; }
