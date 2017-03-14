@@ -6,15 +6,16 @@ using System.Xml.Serialization;
 
 namespace ConsoleApplication1
 {
-    [Serializable]
-    [XmlRoot("AccountList")]
-    [XmlInclude(typeof(Account))]
+    [Serializable()]
+    //[XmlRoot("AccountList")]
+    //[XmlInclude(typeof(Account))]
     public class Account
     {
         //ClearConsole myCC = new ClearConsole();
         //variables
-        [XmlElement("AccountBalance")]
-        protected double balance { get; set; }
+        //[XmlElement("AccountBalance")]
+        //protected double balance { get; set; }
+        public double balance { get; set; }
         protected int firstDate;
         protected int secondDate;
         protected bool usePrevDate = false;
@@ -26,8 +27,9 @@ namespace ConsoleApplication1
         protected double rate;
         protected double accumInterest;
         protected String dispDate;
-        [XmlElement("AccountName")]
-        protected String acctName { get; set; }
+        //[XmlElement("AccountName")]
+        //protected String acctName { get; set; }
+        public String acctName { get; set; }
 
         public string Acct
         {
