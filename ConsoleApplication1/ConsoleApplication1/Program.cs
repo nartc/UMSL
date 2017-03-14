@@ -9,8 +9,9 @@ namespace ConsoleApplication1
 {
     public class Program
     {
-
-        List<Account> acctList = new List<Account>();
+        [XmlArray("AccountArray")]
+        [XmlArrayItem("AccountObjects")]
+        public List<Account> acctList = new List<Account>();
         string dir = @"./test.out";
 
         public static void Main(string[] args)
@@ -27,11 +28,11 @@ namespace ConsoleApplication1
         {
             try
             {
-                using (Stream stream = File.OpenRead(dir))
+                using (FileStream stream = new FileStream(dir, FileMode.Open))
                 {
                     var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     acctList = (List<Account>)bFormatter.Deserialize(stream);
-                    //XmlSerializer xDeserialize = new XmlSerializer(typeof(List<Account>));
+                    //XmlSerializer xDeserialize = new XmlSerializer(typeof(Account));
                     //acctList = (List<Account>)xDeserialize.Deserialize(stream);
                     stream.Close();
                     if (acctList.Count <= 0)
@@ -42,7 +43,7 @@ namespace ConsoleApplication1
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: " + e.Message);
+                //Console.WriteLine("Error: " + e.Message);
                 createAccount();
             }
         }
@@ -284,14 +285,15 @@ namespace ConsoleApplication1
         public void writeAccount()
         {
             //string serializationFile = Path.Combine(dir);
+            //Type[] accountType = { typeof(Account) };
             try
             {
-                using (Stream stream = File.Create(dir))
+                using (FileStream stream = new FileStream(dir, FileMode.Create))
                 {
                     var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                     bFormatter.Serialize(stream, acctList);
-                    //XmlSerializer xSerialize = new XmlSerializer(typeof(List<Account>));
+                    //XmlSerializer xSerialize = new XmlSerializer(typeof(Account), accountType);
                     //xSerialize.Serialize(stream, acctList);
                     stream.Flush();
                     stream.Close();

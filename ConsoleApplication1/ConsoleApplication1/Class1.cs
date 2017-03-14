@@ -2,15 +2,19 @@
 using System.Linq;
 using System.Threading;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace ConsoleApplication1
 {
     [Serializable]
+    [XmlRoot("AccountList")]
+    [XmlInclude(typeof(Account))]
     public class Account
     {
         //ClearConsole myCC = new ClearConsole();
         //variables
-        protected double balance;
+        [XmlElement("AccountBalance")]
+        protected double balance { get; set; }
         protected int firstDate;
         protected int secondDate;
         protected bool usePrevDate = false;
@@ -22,7 +26,8 @@ namespace ConsoleApplication1
         protected double rate;
         protected double accumInterest;
         protected String dispDate;
-        protected String acctName;
+        [XmlElement("AccountName")]
+        protected String acctName { get; set; }
 
         public string Acct
         {
@@ -40,6 +45,7 @@ namespace ConsoleApplication1
             balance = 0;
             acctName = null;
         }
+
 
         public void acctMenu()
         {
