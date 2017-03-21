@@ -7,14 +7,8 @@ using System.Xml.Serialization;
 namespace ConsoleApplication1
 {
     [Serializable()]
-    //[XmlRoot("AccountList")]
-    //[XmlInclude(typeof(Account))]
     public class Account
     {
-        //ClearConsole myCC = new ClearConsole();
-        //variables
-        //[XmlElement("AccountBalance")]
-        //protected double balance { get; set; }
         public double balance { get; set; }
         public int firstDate;
         public int secondDate;
@@ -27,8 +21,6 @@ namespace ConsoleApplication1
         public double rate;
         public double accumInterest;
         public String dispDate;
-        //[XmlElement("AccountName")]
-        //protected String acctName { get; set; }
         public String acctName { get; set; }
 
         public string Acct
@@ -66,7 +58,6 @@ namespace ConsoleApplication1
 
                 String str = Convert.ToString(Console.ReadLine());
                 Thread.Sleep(1 * 200);
-                //myCC.Clear();
                 Console.Clear();
 
                 if (string.IsNullOrEmpty(str))
@@ -80,8 +71,6 @@ namespace ConsoleApplication1
                     input = str[0];
                     if ((input == 'a' || input == 'A') && str.Length == 1)
                     {
-                        //getDate1();
-                        //deposit();
                         if (dateflag)
                         {
                             getDate2();
@@ -100,7 +89,6 @@ namespace ConsoleApplication1
                     }
                     else if ((input == 'b' || input == 'B') && str.Length == 1)
                     {
-                        //withdraw();
                         if (dateflag)
                         {
                             getDate2();
@@ -119,7 +107,6 @@ namespace ConsoleApplication1
                     }
                     else if ((input == 'c' || input == 'C') && str.Length == 1)
                     {
-                        //checkBalance();
                         if (dateflag)
                         {
                             getDate2();
@@ -147,14 +134,12 @@ namespace ConsoleApplication1
                     }
                     else if (str.Length > 1)
                     {
-                        //Console.WriteLine();
                         Console.WriteLine("Please enter only one character at a time");
                         Console.WriteLine();
 
                     }
                     else
                     {
-                        //Console.WriteLine();
                         Console.WriteLine("Invalid input. Please try again");
                         Console.WriteLine();
                     }
@@ -186,7 +171,6 @@ namespace ConsoleApplication1
                 Console.WriteLine("Hit ENTER to go back...");
                 Console.ReadLine();
                 Console.Clear();
-                //myCC.Clear();
             }
         }
 
@@ -223,7 +207,6 @@ namespace ConsoleApplication1
                     Console.WriteLine("Hit ENTER to go back...");
                     Console.ReadLine();
                     Console.Clear();
-                    //myCC.Clear();
                 }
             }
         }
@@ -235,7 +218,6 @@ namespace ConsoleApplication1
             Console.WriteLine("Hit ENTER to go back...");
             Console.ReadLine();
             Console.Clear();
-            //myCC.Clear();
         }
 
         protected void getDate1()

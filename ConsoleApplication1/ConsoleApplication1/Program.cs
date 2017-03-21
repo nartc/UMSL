@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using System.Xml.Serialization;
-//using nsClearConsole;
 
 namespace ConsoleApplication1
 {
     public class Program
     {
-        //[XmlArray("AccountArray")]
-        //[XmlArrayItem("AccountObjects")]
         public List<Account> acctList = new List<Account>();
         string dir = @"./test.xml";
 
@@ -32,6 +29,7 @@ namespace ConsoleApplication1
                 {
                     //var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                     //acctList = (List<Account>)bFormatter.Deserialize(stream);
+
                     XmlSerializer xDeserialize = new XmlSerializer(typeof(List<Account>));
                     acctList = (List<Account>)xDeserialize.Deserialize(stream);
                     stream.Close();
@@ -284,27 +282,18 @@ namespace ConsoleApplication1
 
         public void writeAccount()
         {
-            //string serializationFile = Path.Combine(dir);
-            //Type[] accountType = { typeof(Account) };
             try
             {
-                //test.xml
                 using (FileStream stream = new FileStream(dir, FileMode.Create))
                 {
                     //var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
                     //bFormatter.Serialize(stream, acctList);
+
                     XmlSerializer xSerialize = new XmlSerializer(typeof(List<Account>));
                     xSerialize.Serialize(stream, acctList);
                     stream.Flush();
                     stream.Close();
                 }
-                //using (Stream stream = File.Create("C:/Users/Chau/Desktop/test.xml"))
-                //{
-                //    XmlSerializer serializer = new XmlSerializer(typeof(List<Account>));
-                //    serializer.Serialize(stream, acctList);
-                //    stream.Close();
-                //}
             }
             catch (Exception e)
             {
